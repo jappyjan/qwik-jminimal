@@ -5,7 +5,11 @@ export { NavLink } from "./components/nav-link/nav-link";
 export { Navigation } from "./components/navigation/navigation";
 export { RouterHead } from "./components/router-head/router-head";
 export { Search } from "./components/search/search";
-export { Table } from "./components/table/table";
+export {
+  Table,
+  type TableColumns,
+  type TableData,
+} from "./components/table/table";
 
 // builder.io components
 export { Card, CardRegistryDefinition } from "./components/card/card";

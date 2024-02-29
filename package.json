@@ -39,7 +39,8 @@
     "release": "npm run fmt.check && npm run lint && npm run build && np",
     "start": "vite --open --mode ssr",
     "test": "echo \"No test specified\" && exit 0",
-    "qwik": "qwik"
+    "qwik": "qwik",
+    "upgrade-packages": "npx npm-check-updates --interactive"
   },
   "devDependencies": {
     "@builder.io/qwik": "1.4.5",
