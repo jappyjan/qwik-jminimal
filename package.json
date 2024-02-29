@@ -1,6 +1,6 @@
 {
   "name": "@jappyjan/qwik-jminimal",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "My custom, minimal qwik components",
   "main": "./lib/index.qwik.mjs",
   "qwik": "./lib/index.qwik.mjs",
