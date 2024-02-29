@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import styles from "./step.module.css";
-import { ExpandableImage } from "../../../components/expandable-image/expandable-image";
 import { formatHtmlText } from "../../../../utils/formatHtmlText";
+import { ExpandableImage } from "../../expandable-image/expandable-image";
 
 export interface StepProps {
   index: number;
