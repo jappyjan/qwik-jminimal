@@ -1,10 +1,10 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { TLDR, TLDRRegistryDefinition, type TLDRProps } from "../tldr/tldr";
 import type { TextProps } from "../text/text";
 import { Link } from "@builder.io/qwik-city";
 import { Text, TextRegistryDefinition } from "../text/text";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
-import styles from "./news.module.css?inline";
+import styles from "./news.module.css";
 
 interface NewsProps {
   tldr: TLDRProps;
@@ -16,12 +16,10 @@ interface NewsProps {
 }
 
 export const News = component$<NewsProps>((props) => {
-  useStyles$(styles);
-
   return (
     <div>
       {props.originalSource?.url && (
-        <div class="originalSource">
+        <div class={styles.originalSource}>
           <span>Original Source: </span>
           <Link href={props.originalSource.url} class="anchor">
             {props.originalSource.label ?? "Original Source"}

@@ -4,12 +4,11 @@ import {
   component$,
   useResource$,
   useSignal,
-  useStyles$,
 } from "@builder.io/qwik";
-import styles from "./page-grid.module.css?inline";
+import styles from "./page-grid.module.css";
 import classnames from "classnames";
 import { Card, CardVariant } from "../card/card";
-import type { RegisteredComponent } from "@builder.io/sdk-qwik";
+import type { BuilderContent, RegisteredComponent } from "@builder.io/sdk-qwik";
 import { fetchEntries } from "@builder.io/sdk-qwik";
 import { Link } from "@builder.io/qwik-city";
 import classNames from "classnames";
@@ -23,13 +22,13 @@ interface PageRowProps {
   variant: PageRowVariant;
 }
 const PageRow = component$((props: PageRowProps) => {
-  useStyles$(styles);
-
   return (
     <div
       class={classnames(
-        "gridRow",
-        props.variant === PageRowVariant.one ? "variantOne" : "variantTwo",
+        styles.gridRow,
+        props.variant === PageRowVariant.one
+          ? styles.variantOne
+          : styles.variantTwo,
       )}
     >
       <Slot />
@@ -49,17 +48,6 @@ interface PageGridProps {
   title?: string;
   hideTitleIfEmpty?: boolean;
   href?: string;
-}
-
-interface Page {
-  id: string;
-  data: {
-    type: PageType;
-    title: string;
-    description?: string;
-    previewImage: string;
-    url: string;
-  };
 }
 
 const LoadingState = component$(() => {
@@ -85,15 +73,14 @@ export const PageGrid = component$((props: PageGridProps) => {
           type: props.pageType,
         },
       },
-    }).then((_rawPages) => {
-      const pages = _rawPages as { results?: Page[] } | undefined;
-      if (pages?.results?.length === 0 && hideTitleIfEmpty) {
+    }).then((pages) => {
+      if (pages?.length === 0 && hideTitleIfEmpty) {
         showTitle.value = false;
       }
 
-      const rows: Array<Page[]> = [];
+      const rows: Array<BuilderContent[]> = [];
 
-      pages?.results?.forEach((page, index) => {
+      pages?.forEach((page, index) => {
         if (index % 3 === 0) {
           rows.push([]);
         }
@@ -105,14 +92,14 @@ export const PageGrid = component$((props: PageGridProps) => {
   );
 
   return (
-    <div class="grid">
+    <div class={styles.grid}>
       {showTitle.value &&
         (props.href ? (
-          <Link class={classNames("anchor", "title")} href={props.href}>
+          <Link class={classNames("anchor", styles.title)} href={props.href}>
             {props.title}
           </Link>
         ) : (
-          <span class="title">{props.title}</span>
+          <span class={styles.title}>{props.title}</span>
         ))}
       <Resource
         value={matches}
@@ -120,7 +107,7 @@ export const PageGrid = component$((props: PageGridProps) => {
         onRejected={(error) => <>Error: {error.message}</>}
         onResolved={(rows) => (
           <>
-            {(rows as Array<Page[]>).map((row, rowIndex) => (
+            {(rows as Array<BuilderContent[]>).map((row, rowIndex) => (
               <PageRow
                 key={`row-${rowIndex}`}
                 variant={
@@ -142,10 +129,10 @@ export const PageGrid = component$((props: PageGridProps) => {
                     <Card
                       key={`page-${page.id}`}
                       variant={variant}
-                      title={page.data.title}
-                      headerImageSrc={page.data.previewImage}
-                      description={page.data.description}
-                      href={page.data.url}
+                      title={page.data?.title ?? ""}
+                      headerImageSrc={page.data?.previewImage}
+                      description={page.data?.description}
+                      href={page.data?.url}
                     />
                   );
                 })}

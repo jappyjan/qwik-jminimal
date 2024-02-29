@@ -1,8 +1,8 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import { Step, type StepProps } from "./step/step";
 import type { PrerequesitesProps } from "./prerequesites/prerequesites";
 import { Prerequesites } from "./prerequesites/prerequesites";
-import styles from "./instructions.module.css?inline";
+import styles from "./instructions.module.css";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
 
 interface Props {
@@ -10,13 +10,14 @@ interface Props {
   steps?: StepProps[];
 }
 export const Instructions = component$<Props>((props) => {
-  useStyles$(styles);
-
   return (
     <article>
       {props.prerequesites && (
         <>
-          <Prerequesites {...props.prerequesites} class="prerequesites" />
+          <Prerequesites
+            {...props.prerequesites}
+            class={styles.prerequesites}
+          />
           <hr />
         </>
       )}

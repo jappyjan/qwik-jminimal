@@ -4,7 +4,6 @@ import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
 /**
  * The RouterHead component is placed inside of the document `<head>` element.
  */
-
 export const RouterHead = component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
@@ -36,6 +35,8 @@ export const RouterHead = component$(() => {
       />
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" />
+      <meta name="apple-mobile-web-app-title" content="fpv-drone.info" />
+      <meta name="application-name" content="fpv-drone.info" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#ffffff" />
 

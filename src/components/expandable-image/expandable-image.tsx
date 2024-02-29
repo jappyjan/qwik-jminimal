@@ -1,13 +1,7 @@
 import type { QwikIntrinsicElements } from "@builder.io/qwik";
-import {
-  component$,
-  useSignal,
-  $,
-  useOnWindow,
-  useStyles$,
-} from "@builder.io/qwik";
+import { component$, useSignal, $, useOnWindow } from "@builder.io/qwik";
 import { Dialog } from "../dialog/dialog";
-import styles from "./expandable-image.module.css?inline";
+import styles from "./expandable-image.module.css";
 import classNames from "classnames";
 import { Link } from "@builder.io/qwik-city";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
@@ -19,8 +13,6 @@ interface Props {
 export const ExpandableImage = component$<
   Omit<QwikIntrinsicElements["img"], "onClick$"> & Props
 >((props) => {
-  useStyles$(styles);
-
   const dialogRef = useSignal<HTMLDialogElement>();
 
   const openDialog = $(() => {
@@ -45,29 +37,29 @@ export const ExpandableImage = component$<
     props.srcset ?? (props.src ? srcToSrcSet(props.src) : undefined);
 
   return (
-    <div class={classNames("container", "clickable")}>
+    <div class={classNames(styles.container, "clickable")}>
       <img
         loading="lazy"
         {...props}
-        class={classNames("image", props.class)}
+        class={classNames(styles.image, props.class)}
         onClick$={openDialog}
         srcset={srcSet}
       />
-      <span class="label">Click to enlarge</span>
+      <span class={styles.label}>Click to enlarge</span>
 
       <Dialog ref={dialogRef} onClick$={() => dialogRef.value?.close()}>
-        <div class="dialogContentContainer">
+        <div class={styles.dialogContentContainer}>
           <img
             loading="lazy"
             src={props.src}
             alt={props.alt}
             width={props.width}
             height={props.height}
-            class="dialogImage"
+            class={styles.dialogImage}
             srcset={srcSet}
           />
           <Link href={props.src} target="_blank">
-            <div class="openInNewTabLinkContainer">
+            <div class={styles.openInNewTabLinkContainer}>
               <span class="anchor">Open in new tab</span>
             </div>
           </Link>
