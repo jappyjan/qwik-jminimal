@@ -1,4 +1,4 @@
-import type { IntrinsicElements} from "@builder.io/qwik";
+import type { IntrinsicElements } from "@builder.io/qwik";
 import { component$ } from "@builder.io/qwik";
 
 export type TableData = Array<{
@@ -59,5 +59,5 @@ export const Table = component$<TableProps & IntrinsicElements["table"]>(
         </tbody>
       </table>
     );
-  }
+  },
 );
