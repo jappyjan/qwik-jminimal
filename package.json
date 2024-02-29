@@ -10,11 +10,17 @@
       "import": "./lib/index.qwik.mjs",
       "require": "./lib/index.qwik.cjs",
       "types": "./lib-types/index.d.ts"
+    },
+    "./src": {
+      "import": "./src/index.ts",
+      "require": "./src/index.js",
+      "types": "./src/index.d.ts"
     }
   },
   "files": [
     "lib",
-    "lib-types"
+    "lib-types",
+    "src"
   ],
   "engines": {
     "node": ">=15.0.0"
