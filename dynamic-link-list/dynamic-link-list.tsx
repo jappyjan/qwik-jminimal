@@ -11,6 +11,7 @@ export const DynamicLinkList = component$((props: Props) => {
       model: props.linkModel,
       apiKey: import.meta.env.PUBLIC_BUILDER_API_KEY,
     }).then((links) => {
+      console.log(links);
       links?.sort((a, b) => a.data?.order - b.data?.order);
       return links;
     }),
@@ -24,10 +25,10 @@ export const DynamicLinkList = component$((props: Props) => {
         <ul>
           {links?.map((link) => (
             <li
-              key={`link-${link.data?.href.Default}-${link.data?.label.Default}`}
+              key={`link-${link.data?.href.Default ?? link.data?.href}-${link.data?.label.Default ?? link.data?.label}`}
             >
-              <NavLink href={link.data?.href.Default} activeClass="active">
-                {link.data?.label.Default}
+              <NavLink href={link.data?.href.Default ?? link.data?.href} activeClass="active">
+                {link.data?.label.Default ?? link.data?.label}
               </NavLink>
             </li>
           ))}
