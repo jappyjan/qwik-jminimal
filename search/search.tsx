@@ -3,6 +3,7 @@ import { component$ } from "@builder.io/qwik";
 import SearchIcon from "./search.svg?jsx";
 import styles from "./search.module.css";
 import classNames from "classnames";
+import { Dialog } from "../dialog/dialog";
 
 export const Search = component$<IntrinsicElements["button"]>((props) => {
   return (
@@ -10,11 +11,11 @@ export const Search = component$<IntrinsicElements["button"]>((props) => {
       <button {...props} class={classNames(styles.button, props.class)}>
         <SearchIcon class={styles.searchIcon} />
       </button>
-      <dialog>
+      <Dialog open={false}>
         <form>
           <input type="search" />
         </form>
-      </dialog>
+      </Dialog>
     </>
   );
 });

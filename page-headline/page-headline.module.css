@@ -24,6 +24,14 @@
   margin: 0 !important;
 }
 
+.title {
+  font-weight: bold;
+}
+
+.subtitle {
+  font-weight: lighter;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     padding-bottom: 2.5rem;

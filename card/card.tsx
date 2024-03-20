@@ -1,7 +1,8 @@
 /* eslint-disable qwik/jsx-img */
-import { component$ } from "@builder.io/qwik";
+import type { QwikIntrinsicElements } from "@builder.io/qwik";
+import { Slot, component$ } from "@builder.io/qwik";
 import styles from "./card.module.css";
-import { useNavigate } from "@builder.io/qwik-city";
+import { Link } from "@builder.io/qwik-city";
 import classNames from "classnames";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
 import { srcToSrcSet } from "../../../utils/srcToSrcSet";
@@ -21,8 +22,29 @@ interface Props {
   isLoading?: boolean;
 }
 
+interface WrapperProps {
+  href?: string;
+}
+const WrapperComponent = component$(
+  (props: WrapperProps & QwikIntrinsicElements["div"]) => {
+    const { href, ...rest } = props;
+    if (href) {
+      return (
+        <Link href={href} {...(rest as any)}>
+          <Slot />
+        </Link>
+      );
+    }
+
+    return (
+      <div {...rest}>
+        <Slot />
+      </div>
+    );
+  },
+);
+
 export const Card = component$((props: Props) => {
-  const nav = useNavigate();
   const {
     title,
     description,
@@ -38,13 +60,13 @@ export const Card = component$((props: Props) => {
     (headerImageSrc ? srcToSrcSet(headerImageSrc) : undefined);
 
   return (
-    <div
+    <WrapperComponent
       class={classNames(
         styles.card,
         { [styles.withLink]: !!href },
         { [styles.isLoading]: isLoading },
       )}
-      onClick$={() => (href ? nav(href) : {})}
+      href={href}
     >
       {headerImageSrc && (
         <img
@@ -59,7 +81,7 @@ export const Card = component$((props: Props) => {
       {variant !== CardVariant.small && (
         <p class={styles.description}>{description}</p>
       )}
-    </div>
+    </WrapperComponent>
   );
 });
 

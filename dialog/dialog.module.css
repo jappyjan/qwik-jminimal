@@ -1,11 +1,16 @@
 .dialog {
-  height: 100vh;
   outline: none;
   border: none;
   background: none;
-  max-width: calc(100% - 100px);
-  max-height: calc(100% - 100px);
-  width: 100%;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  --dialog-z-index: 10000;
+  z-index: var(--dialog-z-index);
 }
 
 .dialog[open] {
@@ -14,6 +19,19 @@
   justify-content: center;
 }
 
-.dialog::backdrop {
+.backdrop {
   backdrop-filter: blur(5px);
+  background: rgba(var(--body-background), 0.75);
+  z-index: calc(var(--dialog-z-index) - 1);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.content {
+  margin: 2rem;
+  z-index: var(--dialog-z-index);
 }
