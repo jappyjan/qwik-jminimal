@@ -11,9 +11,10 @@ interface Props {
 export const Instructions = component$<Props>((props) => {
   return (
     <article>
-      {props.prerequesites && (
+      {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
+      {(props.prerequesites?.items?.length ?? 0) > 0 && (
         <>
-          <Prerequesites {...props.prerequesites} />
+          <Prerequesites {...props.prerequesites!} />
           <hr />
         </>
       )}

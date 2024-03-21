@@ -32,7 +32,8 @@
   font-weight: lighter;
 }
 
-@media screen and (max-width: 768px) {
+/** is mobile */
+@media screen  and (orientation: portrait) {
   .container {
     padding-bottom: 2.5rem;
   }
