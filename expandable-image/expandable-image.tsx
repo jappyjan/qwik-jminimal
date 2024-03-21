@@ -15,14 +15,7 @@ export const ExpandableImage = component$<
 >((props) => {
   const dialogRef = useSignal<HTMLDialogElement>();
 
-  const openDialog = $(() => {
-    if (!dialogRef.value) {
-      console.warn("Dialog ref not set");
-      return;
-    }
-
-    dialogRef.value.showModal();
-  });
+  const showDialog = useSignal(false);
 
   useOnWindow(
     "keydown",
@@ -30,11 +23,15 @@ export const ExpandableImage = component$<
       if (event.key === "Escape") {
         dialogRef.value?.close();
       }
-    }),
+    })
   );
 
   const srcSet =
     props.srcset ?? (props.src ? srcToSrcSet(props.src) : undefined);
+
+  const closeDialog = $(() => {
+    showDialog.value = false;
+  });
 
   return (
     <div class={classNames(styles.container, "clickable")}>
@@ -42,12 +39,12 @@ export const ExpandableImage = component$<
         loading="lazy"
         {...props}
         class={classNames(styles.image, props.class)}
-        onClick$={openDialog}
+        onClick$={() => (showDialog.value = true)}
         srcset={srcSet}
       />
       <span class={styles.label}>Click to enlarge</span>
 
-      <Dialog ref={dialogRef} onClick$={() => dialogRef.value?.close()}>
+      <Dialog isOpen={showDialog.value} onClose={closeDialog}>
         <div class={styles.dialogContentContainer}>
           <img
             loading="lazy"

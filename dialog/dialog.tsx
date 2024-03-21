@@ -1,25 +1,32 @@
 import type { QRL } from "@builder.io/qwik";
-import { Slot, component$ } from "@builder.io/qwik";
+import { Slot, component$, useSignal } from "@builder.io/qwik";
 import classNames from "classnames";
 import styles from "./dialog.module.css";
 
 interface Props {
-  onClose?: QRL<() => void>;
+  onClose?: QRL<() => any>;
   class?: string;
+  isOpen?: boolean;
 }
 export const Dialog = component$<Props>((props) => {
-  const { onClose, ...rest } = props;
+  const dialogRef = useSignal<HTMLDialogElement>();
+
+  if (props.isOpen) {
+    dialogRef.value?.showModal();
+  } else {
+    dialogRef.value?.close();
+  }
 
   return (
-    <dialog {...rest} class={classNames(props.class, styles.dialog)}>
+    <dialog class={classNames(props.class, styles.dialog)} ref={dialogRef}>
       <div
         class={styles.backdrop}
         onClick$={() => {
-          if (typeof onClose !== "function") {
+          if (typeof props.onClose !== "function") {
             return;
           }
 
-          onClose();
+          props.onClose();
         }}
       />
       <div class={styles.content}>

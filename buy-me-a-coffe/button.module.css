@@ -1,0 +1,53 @@
+/*
+
+<script
+    type="text/javascript"
+    src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
+    data-name="bmc-button"
+    data-slug="uav.painkillers"
+    data-color="#168eb4"
+    data-emoji="🔥"
+    data-font="Poppins"
+    data-text="Buy me a smoke stopper"
+    data-outline-color="#ffffff"
+    data-font-color="#ffffff"
+    data-coffee-color="#FFDD00"
+></script>;
+
+*/
+
+
+.wrapper {
+    --bmc-button--BG_COLOR: #168eb4;
+    --bmc-button--FONT_COLOR: #ffffff;
+    /*
+    --bmc-button--FONT_SIZE: 20px;
+    --bmc-button--FONT_WEIGHT: 500;
+    --bmc-button--FONT: 'Arial';
+    */
+}
+
+.bmcButtonSvg {
+  height: 32px !important;
+  margin-bottom: 0px !important;
+  box-shadow: none !important;
+  border: none !important;
+  vertical-align: middle !important;
+  transform: scale(0.9);
+  flex-shrink: 0;
+}
+
+.bmcButton {
+  height: 3em;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.bmcButtonText {
+  margin-left: 8px;
+  display: inline-block;
+  line-height: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
