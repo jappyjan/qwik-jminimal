@@ -1,8 +1,8 @@
 import { component$ } from "@builder.io/qwik";
-import { Step, type StepProps } from "./step/step";
+import { InstructionsStep, type StepProps } from "./step/step";
 import type { PrerequesitesProps } from "./prerequesites/prerequesites";
-import { Prerequesites } from "./prerequesites/prerequesites";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
+import { CustomInstructions } from "./custom-instructions";
 
 interface Props {
   prerequesites?: PrerequesitesProps;
@@ -10,21 +10,14 @@ interface Props {
 }
 export const Instructions = component$<Props>((props) => {
   return (
-    <article>
-      {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
-      {(props.prerequesites?.items?.length ?? 0) > 0 && (
-        <>
-          <Prerequesites {...props.prerequesites!} />
-          <hr />
-        </>
-      )}
+    <CustomInstructions prerequesites={props.prerequesites}>
       {props.steps?.map((step, index) => (
         <>
-          <Step key={`step-${index}`} {...step} index={index + 1} />
+          <InstructionsStep key={`step-${index}`} {...step} index={index + 1} />
           {index < (props.steps?.length ?? 0) - 1 && <hr />}
         </>
       ))}
-    </article>
+    </CustomInstructions>
   );
 });
 
