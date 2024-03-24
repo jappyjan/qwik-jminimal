@@ -2,7 +2,7 @@ import { Slot, component$ } from "@builder.io/qwik";
 import styles from "./step.module.css";
 import { formatHtmlText } from "../../../../utils/formatHtmlText";
 import { ExpandableImage } from "../../expandable-image/expandable-image";
-import { RegisteredComponent } from "@builder.io/sdk-qwik";
+import type { RegisteredComponent } from "@builder.io/sdk-qwik";
 
 export interface StepProps {
   index: number;
