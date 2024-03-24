@@ -15,7 +15,6 @@ export const CustomInstructions = component$((props: Props) => {
       {(props.prerequesites?.items?.length ?? 0) > 0 && (
         <>
           <Prerequesites {...props.prerequesites!} />
-          <hr />
         </>
       )}
       <Slot />

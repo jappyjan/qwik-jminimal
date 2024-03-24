@@ -1,3 +1,7 @@
+.wrapper {
+  border-top: 1px solid var(--text-color);
+}
+
 .index {
   font-weight: lighter;
 }
