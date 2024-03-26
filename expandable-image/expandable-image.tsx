@@ -23,7 +23,7 @@ export const ExpandableImage = component$<
       if (event.key === "Escape") {
         dialogRef.value?.close();
       }
-    })
+    }),
   );
 
   const srcSet =

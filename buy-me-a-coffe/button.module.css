@@ -16,11 +16,10 @@
 
 */
 
-
 .wrapper {
-    --bmc-button--BG_COLOR: #168eb4;
-    --bmc-button--FONT_COLOR: #ffffff;
-    /*
+  --bmc-button--BG_COLOR: #168eb4;
+  --bmc-button--FONT_COLOR: #ffffff;
+  /*
     --bmc-button--FONT_SIZE: 20px;
     --bmc-button--FONT_WEIGHT: 500;
     --bmc-button--FONT: 'Arial';
@@ -50,4 +49,3 @@
   width: 100%;
   flex-shrink: 0;
 }
-

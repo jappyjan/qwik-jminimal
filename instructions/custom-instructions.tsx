@@ -28,9 +28,10 @@ export const CustomInstructionsRegistryDefinition: RegisteredComponent = {
   friendlyName: "Customizable Instructions",
   canHaveChildren: true,
   childRequirements: {
-    message: 'You can only put Instruction - Step components inside this component.',
+    message:
+      "You can only put Instruction - Step components inside this component.",
     query: {
-      'component.name': { $in: ['InstructionsStep'] },
+      "component.name": { $in: ["InstructionsStep"] },
     },
   },
   inputs: [

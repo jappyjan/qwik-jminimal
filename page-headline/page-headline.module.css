@@ -33,7 +33,7 @@
 }
 
 /** is mobile */
-@media screen  and (orientation: portrait) {
+@media screen and (orientation: portrait) {
   .container {
     padding-bottom: 2.5rem;
   }

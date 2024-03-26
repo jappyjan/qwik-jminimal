@@ -46,7 +46,7 @@
 }
 
 /* is mobile */
-@media screen  and (orientation: portrait) {
+@media screen and (orientation: portrait) {
   .contentContainer {
     grid-template-rows: min-content auto;
     grid-template-columns: 1fr;

@@ -25,7 +25,7 @@ export const BuyMeACoffeButton = component$((props: Props) => {
 
 export const BuyMeACoffeeButtonRegistryDefinition = (
   defaultSlug: string,
-  defaultText: string
+  defaultText: string,
 ): RegisteredComponent => ({
   component: BuyMeACoffeButton,
   name: "BuyMeACoffe Button",

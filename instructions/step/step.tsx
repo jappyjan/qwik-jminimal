@@ -60,5 +60,5 @@ export const InstructionsStepRegistryDefinition: RegisteredComponent = {
       required: false,
       allowedFileTypes: ["jpeg", "png", "jpg", "svg", "gif", "webp"],
     },
-  ]
-}
+  ],
+};

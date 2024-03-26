@@ -16,7 +16,7 @@ export const PageHeadline = component$((props: Props) => {
   return (
     <>
       {props.backUrl && (
-        <div style={{marginTop: "-3rem", marginBottom: '3rem'}}>
+        <div style={{ marginTop: "-3rem", marginBottom: "3rem" }}>
           <Link
             href={props.backUrl.href}
             class="anchor"
