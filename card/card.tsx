@@ -1,5 +1,5 @@
 /* eslint-disable qwik/jsx-img */
-import type { QwikIntrinsicElements } from "@builder.io/qwik";
+import type { QwikIntrinsicElements, QRL } from "@builder.io/qwik";
 import { Slot, component$ } from "@builder.io/qwik";
 import styles from "./card.module.css";
 import { Link } from "@builder.io/qwik-city";
@@ -12,22 +12,13 @@ export enum CardVariant {
   large = "large",
 }
 
-interface Props {
-  title: string;
-  description?: string;
-  variant: CardVariant;
-  headerImageSrc?: string;
-  headerImageSrcSet?: string;
-  href?: string;
-  isLoading?: boolean;
-}
-
 interface WrapperProps {
   href?: string;
 }
 const WrapperComponent = component$(
   (props: WrapperProps & QwikIntrinsicElements["div"]) => {
     const { href, ...rest } = props;
+
     if (href) {
       return (
         <Link href={href} {...(rest as any)}>
@@ -44,7 +35,17 @@ const WrapperComponent = component$(
   },
 );
 
-export const Card = component$((props: Props) => {
+export interface CardProps {
+  title: string;
+  description?: string;
+  variant: CardVariant;
+  headerImageSrc?: string;
+  headerImageSrcSet?: string;
+  href?: string;
+  isLoading?: boolean;
+  onClick$?: QRL<() => any>;
+}
+export const Card = component$((props: CardProps) => {
   const {
     title,
     description,
@@ -52,6 +53,7 @@ export const Card = component$((props: Props) => {
     headerImageSrc,
     headerImageSrcSet: propHeaderImageSrcSet,
     href,
+    onClick$,
   } = props;
   const isLoading = props.isLoading ?? false;
 
@@ -67,6 +69,7 @@ export const Card = component$((props: Props) => {
         { [styles.isLoading]: isLoading },
       )}
       href={href}
+      onClick$={onClick$}
     >
       {headerImageSrc && (
         <img

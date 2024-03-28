@@ -10,13 +10,18 @@
   border-radius: var(--card--rounding);
   box-shadow: var(--card--shadow-x) var(--card--shadow-y)
     var(--card--shadow-blur) var(--card--shadow-color);
-  background: var(--card-background);
+  background-color: var(--card-background);
   display: grid;
   width: auto;
 }
 
 .withLink {
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.withLink:hover {
+  background-color: var(--base-green);
 }
 
 .headerImage {

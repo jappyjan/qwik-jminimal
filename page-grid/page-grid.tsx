@@ -1,40 +1,14 @@
 import {
   Resource,
-  Slot,
   component$,
   useResource$,
   useSignal,
 } from "@builder.io/qwik";
-import styles from "./page-grid.module.css";
-import classnames from "classnames";
 import { Card, CardVariant } from "../card/card";
 import type { BuilderContent, RegisteredComponent } from "@builder.io/sdk-qwik";
 import { fetchEntries } from "@builder.io/sdk-qwik";
 import { Link } from "@builder.io/qwik-city";
-import classNames from "classnames";
-
-enum PageRowVariant {
-  one = "one",
-  two = "two",
-}
-
-interface PageRowProps {
-  variant: PageRowVariant;
-}
-const PageRow = component$((props: PageRowProps) => {
-  return (
-    <div
-      class={classnames(
-        styles.gridRow,
-        props.variant === PageRowVariant.one
-          ? styles.variantOne
-          : styles.variantTwo,
-      )}
-    >
-      <Slot />
-    </div>
-  );
-});
+import { CardGrid, CardGridRow, CardGridRowVariant } from "../card/card-grid";
 
 enum PageType {
   Page = "page",
@@ -52,11 +26,11 @@ interface PageGridProps {
 
 const LoadingState = component$(() => {
   return (
-    <PageRow variant={PageRowVariant.one}>
+    <CardGridRow variant={CardGridRowVariant.one}>
       <Card title="" variant={CardVariant.large} isLoading />
       <Card title="" variant={CardVariant.small} isLoading />
       <Card title="" variant={CardVariant.small} isLoading />
-    </PageRow>
+    </CardGridRow>
   );
 });
 
@@ -91,57 +65,36 @@ export const PageGrid = component$((props: PageGridProps) => {
     }),
   );
 
+  const TitleSlot =
+    showTitle.value &&
+    (props.href ? (
+      <Link class="anchor" href={props.href}>
+        {props.title}
+      </Link>
+    ) : (
+      <span>{props.title}</span>
+    ));
+
   return (
-    <div class={styles.grid}>
-      {showTitle.value &&
-        (props.href ? (
-          <Link class={classNames("anchor", styles.title)} href={props.href}>
-            {props.title}
-          </Link>
-        ) : (
-          <span class={styles.title}>{props.title}</span>
-        ))}
-      <Resource
-        value={matches}
-        onPending={() => <LoadingState />}
-        onRejected={(error) => <>Error: {error.message}</>}
-        onResolved={(rows) => (
-          <>
-            {(rows as Array<BuilderContent[]>).map((row, rowIndex) => (
-              <PageRow
-                key={`row-${rowIndex}`}
-                variant={
-                  rowIndex % 2 === 0 ? PageRowVariant.one : PageRowVariant.two
-                }
-              >
-                {row.map((page, pageIndex) => {
-                  let variant = CardVariant.small;
-
-                  if (rowIndex % 2 === 0 && pageIndex === 0) {
-                    variant = CardVariant.large;
-                  }
-
-                  if (rowIndex % 2 !== 0 && pageIndex === 2) {
-                    variant = CardVariant.large;
-                  }
-
-                  return (
-                    <Card
-                      key={`page-${page.id}`}
-                      variant={variant}
-                      title={page.data?.title ?? ""}
-                      headerImageSrc={page.data?.previewImage}
-                      description={page.data?.description}
-                      href={page.data?.url}
-                    />
-                  );
-                })}
-              </PageRow>
-            ))}
-          </>
-        )}
-      />
-    </div>
+    <Resource
+      value={matches}
+      onPending={() => <LoadingState />}
+      onRejected={(error) => <>Error: {error.message}</>}
+      onResolved={(rows) => (
+        <CardGrid
+          rows={rows.map((row) =>
+            row.map((page) => ({
+              title: page.data?.title ?? "",
+              headerImageSrc: page.data?.previewImage,
+              description: page.data?.description,
+              href: page.data?.url,
+            })),
+          )}
+        >
+          <div q:slot="title">{TitleSlot}</div>
+        </CardGrid>
+      )}
+    />
   );
 });
 

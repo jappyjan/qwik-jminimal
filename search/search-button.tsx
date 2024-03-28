@@ -1,11 +1,11 @@
 import type { IntrinsicElements } from "@builder.io/qwik";
 import { component$, useSignal, $ } from "@builder.io/qwik";
-import SearchIcon from "./search.svg?jsx";
+import SearchIcon from "./search-icon.svg?jsx";
 import styles from "./search.module.css";
 import classNames from "classnames";
-import { Dialog } from "../dialog/dialog";
+import { SearchDialog } from "./search-dialog";
 
-export const Search = component$<IntrinsicElements["button"]>((props) => {
+export const SearchButton = component$<IntrinsicElements["button"]>((props) => {
   const showDialog = useSignal(false);
 
   const handleSearchClick = $(() => {
@@ -22,16 +22,10 @@ export const Search = component$<IntrinsicElements["button"]>((props) => {
         <SearchIcon class={styles.searchIcon} />
       </button>
 
-      <Dialog
+      <SearchDialog
         isOpen={showDialog.value}
-        onClose={$(() => {
-          showDialog.value = false;
-        })}
-      >
-        <form>
-          <input type="search" />
-        </form>
-      </Dialog>
+        onClose={$(() => (showDialog.value = false))}
+      />
     </>
   );
 });
