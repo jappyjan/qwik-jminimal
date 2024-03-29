@@ -41,6 +41,7 @@ export interface CardProps {
   variant: CardVariant;
   headerImageSrc?: string;
   headerImageSrcSet?: string;
+  headerImageObjectFit?: "cover" | "contain";
   href?: string;
   isLoading?: boolean;
   onClick$?: QRL<() => any>;
@@ -52,6 +53,7 @@ export const Card = component$((props: CardProps) => {
     variant,
     headerImageSrc,
     headerImageSrcSet: propHeaderImageSrcSet,
+    headerImageObjectFit,
     href,
     onClick$,
   } = props;
@@ -78,6 +80,7 @@ export const Card = component$((props: CardProps) => {
           srcset={headerImageSrcSet}
           alt={title}
           class={styles.headerImage}
+          style={{ objectFit: headerImageObjectFit ?? "cover" }}
         />
       )}
       <h3 class={styles.title}>{title}</h3>
@@ -116,6 +119,25 @@ export const CardRegistryDefinition: RegisteredComponent = {
       friendlyName: "Header Image",
       type: "file",
       allowedFileTypes: ["jpeg", "png", "jpg", "svg", "gif", "webp"],
+      required: false,
+    },
+    {
+      name: "headerImageObjectFit",
+      friendlyName: "Header Image Object Fit",
+      type: "string",
+      enum: ["cover", "contain"],
+      required: false,
+    },
+    {
+      name: "href",
+      friendlyName: "Link",
+      type: "string",
+      required: false,
+    },
+    {
+      name: "isLoading",
+      friendlyName: "Is Loading",
+      type: "boolean",
       required: false,
     },
   ],
