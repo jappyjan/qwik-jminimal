@@ -1,31 +1,48 @@
-import { component$ } from "@builder.io/qwik";
+import type { QRL, QwikIntrinsicElements } from "@builder.io/qwik";
+import { component$, $ } from "@builder.io/qwik";
 import EmojiSvg from "./emoji.svg?jsx";
 import styles from "./button.module.css";
 import type { RegisteredComponent } from "@builder.io/sdk-qwik";
 import classNames from "classnames";
+import type { JSX } from "@builder.io/qwik/jsx-runtime";
 
 interface Props {
   slug: string;
   text: string;
+  icon?: QRL<(className: string) => JSX.Element>;
 }
-export const BuyMeACoffeButton = component$((props: Props) => {
-  return (
-    <div class={classNames("button", styles.wrapper)}>
-      <a
-        class={styles.bmcButton}
-        target="_blank"
-        href={`https://buymeacoffee.com/${props.slug}`}
+
+export const BuyMeACoffeButtonContentRenderer = $(
+  (props: Props & QwikIntrinsicElements["div"]) => {
+    const { slug, text, icon, ...divProps } = props;
+
+    return (
+      <div
+        {...divProps}
+        class={classNames("button", styles.wrapper, divProps.class)}
       >
-        <EmojiSvg class={styles.bmcButtonSvg} />
-        <span class={styles.bmcButtonText}>{props.text}</span>
-      </a>
-    </div>
-  );
-});
+        <a
+          class={styles.bmcButton}
+          target="_blank"
+          href={`https://buymeacoffee.com/${slug}`}
+        >
+          {icon ? icon(styles.bmcButtonIcon) : <EmojiSvg class={styles.bmcButtonIcon} />}
+          <span class={styles.bmcButtonText}>{text}</span>
+        </a>
+      </div>
+    );
+  }
+);
+
+export const BuyMeACoffeButton = component$(
+  (props: Props & QwikIntrinsicElements["div"]) => {
+    return <>{BuyMeACoffeButtonContentRenderer(props)}</>;
+  }
+);
 
 export const BuyMeACoffeeButtonRegistryDefinition = (
   defaultSlug: string,
-  defaultText: string,
+  defaultText: string
 ): RegisteredComponent => ({
   component: BuyMeACoffeButton,
   name: "BuyMeACoffe Button",
