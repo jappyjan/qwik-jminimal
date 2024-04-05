@@ -18,6 +18,7 @@ export const SearchButton = component$<IntrinsicElements["button"]>((props) => {
         {...props}
         class={classNames(styles.button, props.class)}
         onClick$={handleSearchClick}
+        aria-label="Open Search Button"
       >
         <SearchIcon class={styles.searchIcon} />
       </button>

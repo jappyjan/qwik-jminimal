@@ -24,7 +24,11 @@ export const Prerequesites = component$<PrerequesitesProps>((props) => {
         {
           // eslint-disable-next-line qwik/jsx-img
           props.image && (
-            <ExpandableImage class={styles.image} src={props.image} />
+            <ExpandableImage
+              class={styles.image}
+              alt="Prerequesistes"
+              src={props.image}
+            />
           )
         }
         <ul class={styles.list}>

@@ -23,7 +23,7 @@ export const ExpandableImage = component$<
       if (event.key === "Escape") {
         dialogRef.value?.close();
       }
-    }),
+    })
   );
 
   const srcSet =
@@ -55,12 +55,11 @@ export const ExpandableImage = component$<
             class={styles.dialogImage}
             srcset={srcSet}
           />
-          <Link href={props.src} target="_blank">
-            <div class={styles.openInNewTabLinkContainer}>
-              <span class="anchor">Open in new tab</span>
-            </div>
-          </Link>
         </div>
+
+        <Link q:slot="footer" class="button" href={props.src} target="_blank">
+          Open in new tab
+        </Link>
       </Dialog>
     </div>
   );

@@ -18,7 +18,11 @@ export const InstructionsStep = component$<StepProps>((props) => {
       <h3 class={styles.index}>Step {props.index}</h3>
       <h2 class={styles.title}>{props.title}</h2>
       {props.image && (
-        <ExpandableImage src={props.image} class={styles.image} />
+        <ExpandableImage
+          src={props.image}
+          alt="step details"
+          class={styles.image}
+        />
       )}
       <div
         dangerouslySetInnerHTML={formattedDescription}

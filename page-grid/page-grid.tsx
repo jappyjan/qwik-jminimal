@@ -4,7 +4,7 @@ import {
   useResource$,
   useSignal,
 } from "@builder.io/qwik";
-import { Card, CardVariant } from "../card/card";
+import { Card, CardProps, CardVariant } from "../card/card";
 import type { BuilderContent, RegisteredComponent } from "@builder.io/sdk-qwik";
 import { fetchEntries } from "@builder.io/sdk-qwik";
 import { Link } from "@builder.io/qwik-city";
@@ -83,12 +83,16 @@ export const PageGrid = component$((props: PageGridProps) => {
       onResolved={(rows) => (
         <CardGrid
           rows={rows.map((row) =>
-            row.map((page) => ({
-              title: page.data?.title ?? "",
-              headerImageSrc: page.data?.previewImage,
-              description: page.data?.description,
-              href: page.data?.url,
-            })),
+            row.map(
+              (page) =>
+                ({
+                  title: page.data?.title ?? "",
+                  headerImageSrc: page.data?.previewImage,
+                  description: page.data?.description,
+                  href: page.data?.url,
+                  headerImageObjectFit: page.data?.previewImageObjectFit,
+                }) as CardProps,
+            ),
           )}
         >
           <div q:slot="title">{TitleSlot}</div>

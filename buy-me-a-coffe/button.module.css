@@ -18,7 +18,7 @@
   box-shadow: none !important;
   border: none !important;
   transform: scale(0.9) rotate(0) ease-in-ease-out;
-  transition: transform .4s;
+  transition: transform 0.4s;
   flex-shrink: 0;
   display: inline-block;
 }

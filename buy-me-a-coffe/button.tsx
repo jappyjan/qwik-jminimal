@@ -26,23 +26,27 @@ export const BuyMeACoffeButtonContentRenderer = $(
           target="_blank"
           href={`https://buymeacoffee.com/${slug}`}
         >
-          {icon ? icon(styles.bmcButtonIcon) : <EmojiSvg class={styles.bmcButtonIcon} />}
+          {icon ? (
+            icon(styles.bmcButtonIcon)
+          ) : (
+            <EmojiSvg class={styles.bmcButtonIcon} />
+          )}
           <span class={styles.bmcButtonText}>{text}</span>
         </a>
       </div>
     );
-  }
+  },
 );
 
 export const BuyMeACoffeButton = component$(
   (props: Props & QwikIntrinsicElements["div"]) => {
     return <>{BuyMeACoffeButtonContentRenderer(props)}</>;
-  }
+  },
 );
 
 export const BuyMeACoffeeButtonRegistryDefinition = (
   defaultSlug: string,
-  defaultText: string
+  defaultText: string,
 ): RegisteredComponent => ({
   component: BuyMeACoffeButton,
   name: "BuyMeACoffe Button",
