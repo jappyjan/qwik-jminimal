@@ -18,7 +18,11 @@ export const Dialog = component$<Props>((props) => {
   }
 
   return (
-    <dialog class={classNames(props.class, styles.dialog)} ref={dialogRef} onClose$={props.onClose}>
+    <dialog
+      class={classNames(props.class, styles.dialog)}
+      ref={dialogRef}
+      onClose$={props.onClose}
+    >
       <div
         class={styles.backdrop}
         onClick$={() => {
@@ -35,7 +39,10 @@ export const Dialog = component$<Props>((props) => {
 
       <div class={styles.footer}>
         <Slot name="footer" />
-        <button onClick$={props.onClose} class={classNames('button', 'warning', styles.closeButton)}>
+        <button
+          onClick$={props.onClose}
+          class={classNames("button", "warning", styles.closeButton)}
+        >
           Close
         </button>
       </div>

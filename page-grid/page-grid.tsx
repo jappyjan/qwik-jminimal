@@ -4,7 +4,8 @@ import {
   useResource$,
   useSignal,
 } from "@builder.io/qwik";
-import { Card, CardProps, CardVariant } from "../card/card";
+import type { CardProps } from "../card/card";
+import { Card, CardVariant } from "../card/card";
 import type { BuilderContent, RegisteredComponent } from "@builder.io/sdk-qwik";
 import { fetchEntries } from "@builder.io/sdk-qwik";
 import { Link } from "@builder.io/qwik-city";
