@@ -31,7 +31,10 @@ export const CustomInstructionsRegistryDefinition: RegisteredComponent = {
     message:
       "You can only put Instruction - Step components inside this component.",
     query: {
-      "component.name": { $in: ["InstructionsStep"] },
+      $or: [
+        { "component.name": { $in: ["InstructionsStep"] } },
+        { "component.name": { $in: ["Symbol"] } },
+      ],
     },
   },
   inputs: [
