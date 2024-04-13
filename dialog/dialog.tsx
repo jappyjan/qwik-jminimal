@@ -1,5 +1,5 @@
 import type { QRL } from "@builder.io/qwik";
-import { Slot, component$, useSignal } from "@builder.io/qwik";
+import { Slot, component$, useSignal, $ } from "@builder.io/qwik";
 import classNames from "classnames";
 import styles from "./dialog.module.css";
 
@@ -21,7 +21,15 @@ export const Dialog = component$<Props>((props) => {
     <dialog
       class={classNames(props.class, styles.dialog)}
       ref={dialogRef}
-      onClose$={props.onClose}
+      onClose$={$((e) => {
+        e.preventDefault();
+
+        if (typeof props.onClose !== "function") {
+          return;
+        }
+
+        props.onClose();
+      })}
     >
       <div
         class={styles.backdrop}
@@ -39,12 +47,14 @@ export const Dialog = component$<Props>((props) => {
 
       <div class={styles.footer}>
         <Slot name="footer" />
-        <button
-          onClick$={props.onClose}
-          class={classNames("button", "warning", styles.closeButton)}
-        >
-          Close
-        </button>
+        {typeof props.onClose === "function" && (
+          <button
+            onClick$={props.onClose}
+            class={classNames("button", "warning", styles.closeButton)}
+          >
+            Close
+          </button>
+        )}
       </div>
     </dialog>
   );
